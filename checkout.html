@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Uplink | Hyperion Checkout</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono&display=swap');
+
+        :root {
+            --solar: #ffb800;
+            --space: #000000;
+        }
+
+        body {
+            background-color: var(--space);
+            color: #f0f0f5;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .input-field {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--solar);
+            background: rgba(255, 255, 255, 0.07);
+            box-shadow: 0 0 15px rgba(255, 184, 0, 0.1);
+        }
+
+        .mono { font-family: 'JetBrains Mono', monospace; }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <nav class="border-b border-white/5 px-8 py-6 flex justify-between items-center bg-black/50 backdrop-blur-md sticky top-0 z-50">
+        <a href="cart.html" class="flex items-center gap-3 group">
+            <div class="w-8 h-8 bg-white/5 border border-white/10 rounded-full flex items-center justify-center text-white/40 group-hover:text-yellow-500 transition-all">←</div>
+            <span class="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Return to Cart</span>
+        </a>
+        <div class="flex items-center gap-2">
+            <div class="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
+            <span class="text-[10px] font-bold text-white/60 uppercase tracking-widest">Encrypted Connection Active</span>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-0 min-h-[calc(100vh-80px)]">
+        
+        <div class="lg:col-span-7 p-8 lg:p-16 border-r border-white/5">
+            <div class="max-w-xl ml-auto" data-aos="fade-right">
+                <header class="mb-12">
+                    <h1 class="text-4xl font-black tracking-tighter uppercase italic mb-2">Secure <span class="text-yellow-500">Uplink</span></h1>
+                    <p class="text-xs font-bold text-white/30 uppercase tracking-[0.3em]">Authorized Entity Details Required</p>
+                </header>
+
+                <form id="checkout-form" onsubmit="handleFinalSubmit(event)" class="space-y-10">
+                    <section>
+                        <h2 class="text-[10px] font-black text-yellow-500/50 uppercase tracking-[0.4em] mb-6">01. Identity</h2>
+                        <input type="email" placeholder="Communication Email" required class="input-field w-full px-6 py-4 rounded-2xl text-sm">
+                    </section>
+
+                    <section>
+                        <h2 class="text-[10px] font-black text-yellow-500/50 uppercase tracking-[0.4em] mb-6">02. Deployment Address</h2>
+                        <div class="grid grid-cols-2 gap-4">
+                            <input type="text" placeholder="First Name" required class="input-field px-6 py-4 rounded-2xl text-sm">
+                            <input type="text" placeholder="Last Name" required class="input-field px-6 py-4 rounded-2xl text-sm">
+                            <input type="text" placeholder="Address" required class="input-field col-span-2 px-6 py-4 rounded-2xl text-sm">
+                            <input type="text" placeholder="City" required class="input-field px-6 py-4 rounded-2xl text-sm">
+                            <input type="text" placeholder="Postal Code" required class="input-field px-6 py-4 rounded-2xl text-sm">
+                        </div>
+                    </section>
+
+                    <section>
+                        <h2 class="text-[10px] font-black text-yellow-500/50 uppercase tracking-[0.4em] mb-6">03. Financial Authorization</h2>
+                        <div class="glass-panel p-8 rounded-[2rem] space-y-4">
+                            <input type="text" placeholder="Card Number" required class="input-field w-full px-6 py-4 rounded-2xl text-sm mono">
+                            <div class="grid grid-cols-2 gap-4">
+                                <input type="text" placeholder="MM / YY" required class="input-field px-6 py-4 rounded-2xl text-sm mono">
+                                <input type="text" placeholder="CVC" required class="input-field px-6 py-4 rounded-2xl text-sm mono">
+                            </div>
+                        </div>
+                    </section>
+
+                    <button type="submit" class="w-full py-6 rounded-2xl bg-yellow-500 text-black font-black text-xs uppercase tracking-[0.3em] hover:bg-white hover:scale-[1.02] transition-all shadow-[0_20px_40px_rgba(255,184,0,0.2)]">
+                        Complete Authorization
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="lg:col-span-5 bg-white/[0.01] p-8 lg:p-16">
+            <div class="max-w-sm" data-aos="fade-left">
+                <h2 class="text-xs font-black uppercase tracking-[0.3em] mb-10 text-white/50">Current Manifest</h2>
+                
+                <div class="flex items-center gap-6 mb-10">
+                    <div class="relative">
+                        <div class="w-20 h-20 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center text-2xl text-yellow-500">☼</div>
+                        <span class="absolute -top-2 -right-2 w-6 h-6 bg-yellow-500 text-black text-[10px] font-black rounded-full flex items-center justify-center">1</span>
+                    </div>
+                    <div>
+                        <h3 class="font-bold uppercase tracking-tight">Solar Plan</h3>
+                        <p class="text-[10px] text-white/30 uppercase tracking-widest mt-1 italic">Prophetic Access</p>
+                    </div>
+                    <div class="ml-auto font-bold">$199.00</div>
+                </div>
+
+                <div class="h-[1px] bg-white/5 my-8"></div>
+
+                <div class="space-y-4 text-sm font-bold uppercase tracking-widest">
+                    <div class="flex justify-between">
+                        <span class="text-white/30 italic">Subtotal</span>
+                        <span>$199.00</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-white/30 italic">Network Tax</span>
+                        <span>$0.00</span>
+                    </div>
+                    <div class="flex justify-between text-yellow-500 pt-4 border-t border-white/5">
+                        <span class="font-black">Total Commitment</span>
+                        <span class="text-2xl font-black italic">$199.00</span>
+                    </div>
+                </div>
+
+                <div class="mt-12 p-6 rounded-2xl border border-white/5 bg-white/5 flex gap-4 items-start">
+                    <span class="text-yellow-500 text-lg">🛡</span>
+                    <p class="text-[9px] text-white/40 leading-loose uppercase font-bold tracking-widest">
+                        Your transmission is encrypted via 256-bit AES protocol. No financial data is stored on local terrestrial servers.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="success-overlay" class="fixed inset-0 bg-black z-[100] hidden flex flex-col items-center justify-center text-center p-6">
+        <div class="w-24 h-24 bg-yellow-500 rounded-full flex items-center justify-center text-black text-4xl mb-8 shadow-[0_0_60px_rgba(255,184,0,0.5)] transition-all scale-0" id="check-icon">✓</div>
+        <h2 class="text-4xl font-black uppercase tracking-tighter italic mb-4">Ascension Complete</h2>
+        <p class="text-white/40 text-xs uppercase tracking-[0.3em] mb-12 max-w-sm leading-loose">The solar uplink has been established. Check your communication email for the access cipher.</p>
+        <a href="index.html" class="px-12 py-5 bg-white text-black rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] hover:bg-yellow-500 transition-all">Enter the Sanctum</a>
+    </div>
+
+    <script>
+        AOS.init({ duration: 1000 });
+
+        function handleFinalSubmit(e) {
+            e.preventDefault();
+            const overlay = document.getElementById('success-overlay');
+            const icon = document.getElementById('check-icon');
+            
+            overlay.classList.remove('hidden');
+            overlay.classList.add('flex');
+            
+            setTimeout(() => {
+                icon.classList.remove('scale-0');
+                icon.classList.add('scale-100');
+            }, 300);
+        }
+    </script>
+</body>
+</html>

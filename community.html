@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stellar Discord | Hyperion Community</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono&display=swap');
+
+        :root {
+            --solar: #ffb800;
+            --space: #050508;
+            --terminal: rgba(255, 255, 255, 0.03);
+        }
+
+        body {
+            background-color: var(--space);
+            color: #f0f0f5;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .glass-panel {
+            background: var(--terminal);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .channel-active {
+            background: rgba(255, 184, 0, 0.1);
+            color: var(--solar);
+            border-left: 2px solid var(--solar);
+        }
+
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        /* Custom Scrollbar for Chat */
+        .chat-scroll::-webkit-scrollbar { width: 4px; }
+        .chat-scroll::-webkit-scrollbar-thumb { background: rgba(255, 184, 0, 0.2); }
+    </style>
+</head>
+<body class="flex flex-col">
+
+    <nav class="h-16 border-b border-white/5 flex items-center justify-between px-6 bg-black/40">
+        <div class="flex items-center gap-4">
+            <div class="w-8 h-8 bg-yellow-500 rounded-lg flex items-center justify-center text-black font-black">H</div>
+            <span class="font-bold tracking-tighter uppercase text-xs">Stellar // Discord</span>
+        </div>
+        <div class="flex gap-4">
+            <button onclick="window.location.href='index.html'" class="text-[10px] font-black uppercase tracking-widest text-white/40 hover:text-white transition-colors">Exit Terminal</button>
+        </div>
+    </nav>
+
+    <div class="flex flex-1 overflow-hidden">
+        
+        <aside class="w-64 bg-black/20 border-r border-white/5 hidden md:flex flex-col p-4">
+            <h2 class="text-[10px] font-black text-white/20 uppercase tracking-[0.2em] mb-6 px-4">Constellations</h2>
+            <nav class="space-y-1">
+                <div class="px-4 py-2 rounded-md text-sm font-medium channel-active cursor-pointer"># general-transmission</div>
+                <div class="px-4 py-2 rounded-md text-sm font-medium text-white/40 hover:bg-white/5 cursor-pointer transition-all"># solar-alerts</div>
+                <div class="px-4 py-2 rounded-md text-sm font-medium text-white/40 hover:bg-white/5 cursor-pointer transition-all"># dev-prophecies</div>
+                <div class="px-4 py-2 rounded-md text-sm font-medium text-white/40 hover:bg-white/5 cursor-pointer transition-all"># titan-lounge</div>
+            </nav>
+        </aside>
+
+        <main class="flex-1 flex flex-col bg-black/10">
+            <div class="p-4 border-b border-white/5 flex justify-between items-center bg-white/[0.02]">
+                <div>
+                    <span class="text-white/30 font-mono">#</span>
+                    <span class="font-bold ml-1">general-transmission</span>
+                </div>
+                <div class="text-[10px] text-green-500 font-bold mono uppercase">● 1,240 Oracles Online</div>
+            </div>
+
+            <div class="flex-1 overflow-y-auto p-6 space-y-8 chat-scroll">
+                <div class="flex gap-4" data-aos="fade-up">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-yellow-500 to-orange-600 flex-shrink-0"></div>
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="font-black text-yellow-500 text-sm">ARCH-ORACLE</span>
+                            <span class="text-[9px] text-white/20 mono">14:20 UTC</span>
+                        </div>
+                        <p class="text-sm text-white/70 leading-relaxed max-w-2xl">
+                            The solar flare data from the <span class="text-yellow-500">/vision</span> endpoint is showing a 98% correlation with the Helios-99 cycle. Prepare the buffers.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex gap-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-10 h-10 rounded-full bg-purple-600 flex-shrink-0"></div>
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="font-black text-white/80 text-sm">Titan_Dev_01</span>
+                            <span class="text-[9px] text-white/20 mono">14:22 UTC</span>
+                        </div>
+                        <p class="text-sm text-white/70 leading-relaxed max-w-2xl">
+                            Confirmed. Integrating the Prophetic API into our main dashboard now. The latency is practically non-existent.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-6 bg-black/40">
+                <div class="glass-panel rounded-2xl p-4 flex items-center gap-4">
+                    <button class="text-white/20 hover:text-yellow-500">+</button>
+                    <input type="text" placeholder="Message #general-transmission" class="bg-transparent flex-1 outline-none text-sm text-white/80">
+                    <button class="px-4 py-2 bg-yellow-500 text-black text-[10px] font-black uppercase rounded-lg">Transmit</button>
+                </div>
+            </div>
+        </main>
+
+        <aside class="w-64 bg-black/20 border-l border-white/5 hidden xl:flex flex-col p-6">
+            <h2 class="text-[10px] font-black text-white/20 uppercase tracking-[0.2em] mb-6">Oracles — 2</h2>
+            <div class="space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="relative">
+                        <div class="w-8 h-8 rounded-full bg-yellow-500"></div>
+                        <div class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-[#050508] rounded-full"></div>
+                    </div>
+                    <span class="text-xs font-bold text-yellow-500">ARCH-ORACLE</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="relative">
+                        <div class="w-8 h-8 rounded-full bg-purple-600"></div>
+                        <div class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-[#050508] rounded-full"></div>
+                    </div>
+                    <span class="text-xs font-bold text-white/60">Titan_Dev_01</span>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        AOS.init({ duration: 800 });
+    </script>
+</body>
+</html>

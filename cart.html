@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart | Hyperion</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono&display=swap');
+
+        :root {
+            --solar: #ffb800;
+            --space: #000000;
+        }
+
+        body {
+            background-color: var(--space);
+            color: #f0f0f5;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .cart-item-border {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        /* Smooth removal animation */
+        .item-fade-out {
+            opacity: 0;
+            transform: scale(0.9) translateX(-30px);
+            filter: blur(10px);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-black">
+
+    <nav class="border-b border-white/5 px-8 py-6 flex justify-between items-center">
+        <a href="index.html" class="flex items-center gap-2 group">
+            <div class="w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center text-black font-black text-[10px]">☼</div>
+            <span class="font-extrabold tracking-tighter uppercase text-sm">Hyperion</span>
+        </a>
+        <div class="text-[10px] font-bold text-white/40 uppercase tracking-widest">Secure Checkout</div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto py-16 px-6">
+        <div class="flex flex-col lg:flex-row gap-16">
+            
+            <div class="flex-grow">
+                <h1 class="text-3xl font-black tracking-tight mb-8">Your Cart <span id="cart-count" class="text-white/20 ml-2">(1)</span></h1>
+                
+                <div id="cart-items-container" class="space-y-0" data-aos="fade-up">
+                    <div id="solar-plan-item" class="cart-item-border py-8 flex flex-col sm:flex-row gap-6 items-start sm:items-center justify-between group">
+                        <div class="flex gap-6 items-center">
+                            <div class="w-24 h-24 bg-white/5 rounded-2xl flex items-center justify-center border border-white/10 group-hover:border-yellow-500/30 transition-colors">
+                                <span class="text-3xl text-yellow-500">☼</span>
+                            </div>
+                            
+                            <div>
+                                <h3 id="display-plan-name" class="font-bold text-lg tracking-tight">Solar Plan Subscription</h3>
+                                <p class="text-xs text-white/40 mt-1 uppercase tracking-widest">Monthly Access • Prophetic Tier</p>
+                                <div class="mt-4 flex items-center gap-4">
+                                    <button onclick="removeItem('solar-plan-item')" class="text-[10px] font-bold text-white/20 hover:text-red-500 uppercase tracking-widest transition-colors">Remove</button>
+                                    <button class="text-[10px] font-bold text-white/20 hover:text-yellow-500 uppercase tracking-widest transition-colors">Save for later</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-right w-full sm:w-auto">
+                            <div id="display-plan-price" class="text-xl font-bold">$199.00</div>
+                            <div class="text-[10px] text-yellow-500/50 uppercase font-black tracking-tighter mt-1 italic">Renews Mar 2026</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="empty-cart-msg" class="hidden py-20 text-center" data-aos="zoom-in">
+                    <div class="text-4xl mb-4 opacity-20">∅</div>
+                    <p class="text-white/20 font-bold uppercase tracking-widest">The vault is currently empty.</p>
+                </div>
+
+                <a href="index.html#pricing" class="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-white/40 hover:text-white mt-12 transition-all">
+                    ← Continue Observation
+                </a>
+            </div>
+
+            <aside class="w-full lg:w-[380px]" data-aos="fade-left">
+                <div class="glass-panel rounded-3xl p-8 sticky top-8">
+                    <h2 class="text-lg font-bold mb-6 tracking-tight">Order Summary</h2>
+                    
+                    <div class="space-y-4">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-white/40">Subtotal</span>
+                            <span id="summary-subtotal" class="font-bold">$199.00</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-white/40">Network Fee</span>
+                            <span class="text-green-500 font-bold uppercase text-[10px] tracking-widest">Waived</span>
+                        </div>
+                        
+                        <div class="h-[1px] bg-white/5 my-6"></div>
+
+                        <div class="flex justify-between items-end mb-8">
+                            <span class="font-bold">Total</span>
+                            <div class="text-right">
+                                <span id="summary-total" class="text-2xl font-black block leading-none">$199.00</span>
+                                <span class="text-[10px] text-white/20 uppercase font-bold tracking-widest">USD</span>
+                            </div>
+                        </div>
+
+                        <button id="checkout-btn" onclick="processCheckout()" class="w-full py-5 rounded-2xl bg-yellow-500 text-black font-black text-xs uppercase tracking-[0.2em] hover:bg-white transition-all shadow-[0_20px_40px_rgba(255,184,0,0.2)]">
+                            Proceed to Checkout
+                        </button>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <script>
+        AOS.init({ duration: 800 });
+
+        function removeItem(itemId) {
+            const item = document.getElementById(itemId);
+            item.classList.add('item-fade-out');
+
+            setTimeout(() => {
+                item.remove();
+                // Clear the selection from memory so it stays deleted on refresh
+                localStorage.removeItem('hyperion_selection');
+                updateCartTotals();
+            }, 450);
+        }
+
+        function updateCartTotals() {
+            const items = document.querySelectorAll('.cart-item-border');
+            const countElement = document.getElementById('cart-count');
+            
+            if (items.length === 0) {
+                countElement.innerText = '(0)';
+                document.getElementById('summary-subtotal').innerText = '$0.00';
+                document.getElementById('summary-total').innerText = '$0.00';
+                document.getElementById('empty-cart-msg').classList.remove('hidden');
+                
+                const btn = document.getElementById('checkout-btn');
+                btn.disabled = true;
+                btn.classList.add('opacity-10', 'cursor-not-allowed', 'grayscale');
+                btn.innerText = 'Manifest Empty';
+            } else {
+                countElement.innerText = `(${items.length})`;
+            }
+        }
+
+        function processCheckout() {
+            const overlay = document.createElement('div');
+            overlay.className = 'fixed inset-0 bg-black z-[100] flex flex-col items-center justify-center text-center p-6';
+            overlay.innerHTML = `
+                <div class="w-16 h-16 border-2 border-yellow-500/20 border-t-yellow-500 rounded-full animate-spin mb-8"></div>
+                <h2 class="mono text-yellow-500 text-xs uppercase tracking-[0.5em]">Verifying Authorization...</h2>
+            `;
+            document.body.appendChild(overlay);
+            
+            setTimeout(() => {
+                window.location.href = 'checkout.html';
+            }, 1200);
+        }
+
+        // Logic to handle page load and data injection
+        document.addEventListener('DOMContentLoaded', () => {
+            const data = JSON.parse(localStorage.getItem('hyperion_selection'));
+
+            if (data) {
+                document.getElementById('display-plan-name').innerText = data.planName;
+                document.getElementById('display-plan-price').innerText = `$${data.planPrice}.00`;
+                document.getElementById('summary-subtotal').innerText = `$${data.planPrice}.00`;
+                document.getElementById('summary-total').innerText = `$${data.planPrice}.00`;
+                document.getElementById('cart-count').innerText = '(1)';
+            } else {
+                // If no plan is in memory, hide the item container and show empty message
+                document.getElementById('cart-items-container').classList.add('hidden');
+                updateCartTotals();
+            }
+        });
+    </script>
+</body>
+</html>

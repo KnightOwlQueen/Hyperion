@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyperion Vision | Celestial Analytics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono&display=swap');
+
+        :root {
+            --solar: #ffb800;
+            --dawn: #ff4d00;
+            --space: #050508;
+        }
+
+        body {
+            background-color: var(--space);
+            color: #f0f0f5;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .nav-blur {
+            background: rgba(5, 5, 8, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 184, 0, 0.1);
+        }
+
+        .solar-glow {
+            box-shadow: 0 0 40px rgba(255, 184, 0, 0.15);
+            border: 1px solid rgba(255, 184, 0, 0.2);
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--solar), var(--dawn));
+            color: #000;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 0 30px rgba(255, 184, 0, 0.4);
+            filter: brightness(1.1);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .sun-chariot-gradient {
+            background: linear-gradient(180deg, rgba(255, 184, 0, 0.1) 0%, rgba(5, 5, 8, 0) 100%);
+        }
+
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        
+        @keyframes orbit {
+            from { transform: rotate(0deg) translateX(100px) rotate(0deg); }
+            to { transform: rotate(360deg) translateX(100px) rotate(-360deg); }
+        }
+        .oracle-pulse {
+            animation: pulse 4s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+        html {
+        scroll-behavior: smooth;
+        /* Matches your navbar height so the section isn't hidden behind it */
+        scroll-padding-top: 80px; 
+    }
+    
+    </style>
+</head>
+<body>
+
+   <nav class="nav-blur sticky top-0 z-50 px-6 py-4">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <div class="flex items-center gap-10">
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 bg-gradient-to-tr from-yellow-500 to-orange-600 rounded-full flex items-center justify-center text-black font-black shadow-[0_0_20px_rgba(255,184,0,0.5)]">☼</div>
+                <span class="font-extrabold tracking-tighter text-xl uppercase">Hyperion</span>
+            </a>
+            
+            <div class="hidden lg:flex gap-8 text-[11px] font-bold uppercase tracking-[0.2em] text-white/40">
+                <a href="index.html#features" class="hover:text-yellow-500 transition-colors">Divine Features</a>
+                <a href="index.html#gallery" class="hover:text-yellow-500 transition-colors">Report Gallery</a>
+                <a href="index.html#pricing" class="hover:text-yellow-500 transition-colors">Stellar Pricing</a>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-6">
+            <a href="signin.html" class="text-xs font-bold uppercase tracking-widest text-white/60 hover:text-white">Sign In</a>
+            <a href="demo.html" class="btn-primary px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-widest bg-yellow-500 text-black">Book a Demo</a>
+        </div>
+    </div>
+</nav>
+
+    <header class="relative pt-24 pb-40 px-6 overflow-hidden">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] sun-chariot-gradient rounded-full blur-[120px] -z-10"></div>
+        <div class="max-w-4xl mx-auto text-center">
+            <div data-aos="fade-down" class="inline-block px-4 py-1.5 rounded-full border border-yellow-500/20 bg-yellow-500/5 text-yellow-500 text-[10px] font-bold uppercase tracking-[0.3em] mb-8">
+                Titan-Class Intelligence
+            </div>
+            <h1 data-aos="fade-up" class="text-6xl md:text-8xl font-extrabold tracking-tighter mb-8 leading-[0.9]">
+                Behold the <span class="text-transparent bg-clip-text bg-gradient-to-b from-yellow-300 to-orange-600">Future</span> of Data.
+            </h1>
+            <p data-aos="fade-up" data-aos-delay="100" class="text-lg text-white/50 mb-12 max-w-2xl mx-auto leading-relaxed">
+                Hyperion Vision grants you the sight of Helios. Monitor past cycles, present streams, and prophetic insights through celestial-grade BI tools.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4" data-aos="fade-up" data-aos-delay="200">
+                <a href="demo.html" class="btn-primary px-10 py-5 rounded-2xl text-sm font-black uppercase tracking-widest">Initiate Vision</a>
+                <a href="#features" class="btn-secondary px-10 py-5 rounded-2xl text-sm font-black uppercase tracking-widest text-white">Explore Features</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="features" class="relative py-32 px-6 overflow-hidden bg-black">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-yellow-500/5 rounded-full blur-[120px] pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto relative z-10">
+        <div class="mb-20" data-aos="fade-right">
+            <div class="flex items-center gap-4 mb-4">
+                <div class="w-12 h-[1px] bg-yellow-500"></div>
+                <span class="text-yellow-500 text-[10px] font-black uppercase tracking-[0.4em]">Core Capabilities</span>
+            </div>
+            <h2 class="text-5xl md:text-7xl font-extrabold tracking-tighter leading-none italic uppercase">
+                Divine <span class="text-transparent border-t border-b border-white/20 px-4">Intelligence</span>
+            </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <div class="glass-panel p-10 rounded-[3rem] group hover:border-yellow-500/50 transition-all duration-500" data-aos="fade-up" data-aos-delay="100">
+                <div class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-yellow-500 transition-all duration-500">
+                    <span class="text-2xl group-hover:filter group-hover:invert">◈</span>
+                </div>
+                <h3 class="text-xl font-bold mb-4 uppercase tracking-tight">Solar Prediction</h3>
+                <p class="text-white/40 text-sm leading-relaxed mb-6">Utilize Titan-class algorithms to forecast market fluctuations with 99.9% celestial accuracy before they manifest.</p>
+                <div class="flex items-center gap-2 text-[10px] font-black text-yellow-500 uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
+                    View Logic <span>→</span>
+                </div>
+            </div>
+
+            <div class="glass-panel p-10 rounded-[3rem] border-white/5 group hover:border-orange-500/50 transition-all duration-500" data-aos="fade-up" data-aos-delay="200">
+                <div class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-orange-500 transition-all duration-500">
+                    <span class="text-2xl group-hover:filter group-hover:invert">⌬</span>
+                </div>
+                <h3 class="text-xl font-bold mb-4 uppercase tracking-tight">Neural Sanctum</h3>
+                <p class="text-white/40 text-sm leading-relaxed mb-6">A private, encrypted environment where your data is processed through our isolated proprietary neural network.</p>
+                <div class="flex items-center gap-2 text-[10px] font-black text-orange-500 uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
+                    Access Vault <span>→</span>
+                </div>
+            </div>
+
+            <div class="glass-panel p-10 rounded-[3rem] group hover:border-white/50 transition-all duration-500" data-aos="fade-up" data-aos-delay="300">
+                <div class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-white transition-all duration-500">
+                    <span class="text-2xl group-hover:text-black">⧉</span>
+                </div>
+                <h3 class="text-xl font-bold mb-4 uppercase tracking-tight">Recursive Audit</h3>
+                <p class="text-white/40 text-sm leading-relaxed mb-6">Self-correcting diagnostic streams that identify and repair system inefficiencies in real-time cosmic cycles.</p>
+                <div class="flex items-center gap-2 text-[10px] font-black text-white uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
+                    Run Stream <span>→</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+    <section class="px-6 pb-32">
+        <div class="w-full max-w-3xl mx-auto p-4" data-aos="zoom-in">
+    <div class="bg-[#050508] border border-white/10 rounded-xl overflow-hidden shadow-2xl">
+        <div class="bg-white/5 px-4 py-2 border-b border-white/10 flex justify-between items-center">
+            <div class="flex gap-1.5">
+                <div class="w-2.5 h-2.5 rounded-full bg-red-500/20 border border-red-500/40"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-yellow-500/20 border border-yellow-500/40"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-green-500/20 border border-green-500/40"></div>
+            </div>
+            <span class="text-[9px] font-black uppercase tracking-widest text-white/20 mono">Titan-OS // v4.0.1</span>
+        </div>
+
+        <div id="terminal-body" class="p-6 h-80 overflow-y-auto mono text-xs leading-relaxed chat-scroll text-yellow-500/80">
+            <div class="mb-2 text-white/40 italic">-- System Initialization Sequence Started --</div>
+            <div id="terminal-log" class="space-y-1"></div>
+            <div class="flex items-center gap-2 mt-2">
+                <span class="text-white/40">hyperion@oracle:~$</span>
+                <input type="text" id="terminal-input" class="bg-transparent border-none outline-none flex-1 text-yellow-500" autofocus autocomplete="off">
+            </div>
+        </div>
+    </div>
+</div>
+        <!-- <div class="max-w-6xl mx-auto solar-glow rounded-[3rem] bg-white/5 p-4 overflow-hidden relative">
+            <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
+            <div class="grid lg:grid-cols-3 gap-8 p-8 relative z-10">
+                <div class="space-y-6">
+                    <h3 class="text-xs font-black uppercase tracking-widest text-yellow-500">Dawn-to-Dusk Metrics</h3>
+                    <div class="space-y-8 py-4">
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-[10px] font-bold text-white/40">
+                                <span>SOLAR INTENSITY</span>
+                                <span class="mono">88%</span>
+                            </div>
+                            <div class="h-1 bg-white/10 rounded-full overflow-hidden">
+                                <div class="h-full bg-yellow-500 w-[88%] shadow-[0_0_10px_#ffb800]"></div>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-[10px] font-bold text-white/40">
+                                <span>ORACLE RELIABILITY</span>
+                                <span class="mono">99.2%</span>
+                            </div>
+                            <div class="h-1 bg-white/10 rounded-full overflow-hidden">
+                                <div class="h-full bg-orange-600 w-[99%] shadow-[0_0_10px_#ff4d00]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2 glass rounded-3xl p-10 flex flex-col items-center justify-center min-h-[400px]">
+                    <div class="relative w-64 h-64 border border-white/5 rounded-full flex items-center justify-center">
+                        <div class="absolute inset-0 border border-yellow-500/10 rounded-full animate-spin [animation-duration:10s]"></div>
+                        <div class="w-32 h-32 bg-yellow-500/10 rounded-full blur-3xl oracle-pulse"></div>
+                        <div class="text-center z-10">
+                            <p class="text-xs font-bold text-white/40 mb-1">Prophetic Load</p>
+                            <p class="text-5xl font-black text-white mono tracking-tighter">1.42<span class="text-xl text-yellow-500">Tb</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </section>
+
+    <section id="gallery" class="py-24 px-6 bg-gradient-to-b from-transparent to-black/50">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-16 text-center" data-aos="fade-up">
+                <h2 class="text-4xl font-extrabold tracking-tighter mb-4">Oracle Report Gallery</h2>
+                <p class="text-white/40 max-w-xl mx-auto uppercase text-[10px] tracking-[.3em] font-bold">Pre-built templates for divine clarity</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass p-1 rounded-[2rem] group cursor-pointer overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+                    <div class="bg-[#0a0a0f] rounded-[1.9rem] p-8 transition-all group-hover:bg-yellow-500/5">
+                        <div class="w-12 h-12 bg-yellow-500/10 rounded-full flex items-center justify-center text-yellow-500 mb-6 group-hover:scale-110 transition-transform">✦</div>
+                        <h3 class="text-xl font-bold mb-2">Solar Cycle Audit</h3>
+                        <p class="text-white/40 text-sm mb-6">Analyze 24-hour traffic waves and peak solar intensity periods.</p>
+                        <span class="text-[10px] font-black text-yellow-500 tracking-widest uppercase">View Template →</span>
+                    </div>
+                </div>
+                <div class="glass p-1 rounded-[2rem] group cursor-pointer overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+                    <div class="bg-[#0a0a0f] rounded-[1.9rem] p-8 transition-all group-hover:bg-orange-500/5">
+                        <div class="w-12 h-12 bg-orange-500/10 rounded-full flex items-center justify-center text-orange-500 mb-6 group-hover:scale-110 transition-transform">☼</div>
+                        <h3 class="text-xl font-bold mb-2">Prophetic Forecast</h3>
+                        <p class="text-white/40 text-sm mb-6">Predict upcoming infrastructure strain before the dawn breaks.</p>
+                        <span class="text-[10px] font-black text-orange-500 tracking-widest uppercase">View Template →</span>
+                    </div>
+                </div>
+                <div class="glass p-1 rounded-[2rem] group cursor-pointer overflow-hidden" data-aos="fade-up" data-aos-delay="300">
+                    <div class="bg-[#0a0a0f] rounded-[1.9rem] p-8 transition-all group-hover:bg-white/5">
+                        <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">◈</div>
+                        <h3 class="text-xl font-bold mb-2">Stellar Distribution</h3>
+                        <p class="text-white/40 text-sm mb-6">Map your data constellation across 12 divine global regions.</p>
+                        <span class="text-[10px] font-black text-white/60 tracking-widest uppercase">View Template →</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
+            <div class="lg:w-1/2" data-aos="fade-right">
+                <div class="w-12 h-1 bg-yellow-500 mb-8"></div>
+                <h2 class="text-5xl font-black tracking-tighter mb-6">Real-Time Titan Streams</h2>
+                <p class="text-white/50 text-lg leading-relaxed mb-8">
+                    Don't just watch data—observe its soul. Our Titan streams offer sub-millisecond latency for real-time observation of global events.
+                </p>
+                <div class="space-y-4">
+                    <div class="flex items-center gap-4 mono text-xs text-yellow-500/80">
+                        <span class="w-2 h-2 rounded-full bg-yellow-500 animate-ping"></span>
+                        LIVE_FEED: OLYMPUS_REGION_PRIMARY
+                    </div>
+                    <div class="flex items-center gap-4 mono text-xs text-white/30">
+                        <span class="w-2 h-2 rounded-full bg-white/20"></span>
+                        DATA_PACKETS: 4.2B / SEC
+                    </div>
+                </div>
+            </div>
+            <div class="lg:w-1/2 w-full" data-aos="zoom-in">
+                <div class="glass aspect-video rounded-[3rem] p-8 flex flex-col justify-between relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-yellow-500/10 to-transparent"></div>
+                    <div class="flex justify-between items-start z-10">
+                        <div class="mono text-[10px] text-white/40">QUERY_VOL_MAP</div>
+                        <div class="bg-green-500/20 text-green-500 px-3 py-1 rounded-full text-[10px] font-bold">STABLE</div>
+                    </div>
+                    <div class="flex items-end gap-1 h-32 z-10">
+                        <div class="flex-1 bg-white/10 rounded-t-sm animate-pulse" style="height: 40%"></div>
+                        <div class="flex-1 bg-white/10 rounded-t-sm animate-pulse" style="height: 60%; animation-delay: 0.2s"></div>
+                        <div class="flex-1 bg-yellow-500/40 rounded-t-sm" style="height: 90%"></div>
+                        <div class="flex-1 bg-white/10 rounded-t-sm animate-pulse" style="height: 50%; animation-delay: 0.4s"></div>
+                        <div class="flex-1 bg-white/10 rounded-t-sm animate-pulse" style="height: 75%; animation-delay: 0.1s"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="py-32 px-6 relative overflow-hidden">
+    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-yellow-500/10 blur-[120px] rounded-full -z-10"></div>
+    <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-5xl font-black tracking-tighter mb-4">Choose Your Light.</h2>
+            <p class="text-white/40">Simple pricing for complex observation.</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8 items-center">
+            
+            <div class="glass p-10 rounded-[2.5rem] border-white/5 order-2 md:order-1">
+                <h3 class="text-lg font-bold mb-1">Dusk</h3>
+                <div class="text-3xl font-black mb-6">$49<span class="text-sm text-white/30">/mo</span></div>
+                <ul class="space-y-4 mb-8 text-sm text-white/50">
+                    <li>✓ 10 Oracle Reports</li>
+                    <li>✓ 24h Data Retention</li>
+                    <li>✓ Basic Chariot Charts</li>
+                </ul>
+                <button onclick="addToCart('Dusk Plan', 49)" class="w-full py-4 rounded-2xl border border-white/10 hover:bg-white/5 transition-colors font-bold text-xs uppercase tracking-widest">Select Plan</button>
+            </div>
+
+            <div class="glass p-1 rounded-[2.5rem] solar-glow border-yellow-500/30 bg-gradient-to-b from-yellow-500/10 to-transparent order-1 md:order-2 scale-105">
+                <div class="p-10">
+                    <div class="bg-yellow-500 text-black text-[9px] font-black px-3 py-1 rounded-full inline-block mb-4 tracking-widest uppercase">Most Prophetic</div>
+                    <h3 class="text-xl font-black mb-1">Solar</h3>
+                    <div class="text-4xl font-black mb-6">$199<span class="text-sm text-white/30">/mo</span></div>
+                    <ul class="space-y-4 mb-8 text-sm text-white/80">
+                        <li class="text-yellow-500 font-bold">★ Unlimited Oracles</li>
+                        <li>✓ Prophetic ML Insights</li>
+                        <li>✓ 30-Day Data History</li>
+                    </ul>
+                    <button onclick="addToCart('Solar Plan', 199)" class="w-full py-4 rounded-2xl bg-yellow-500 text-black font-black text-xs uppercase tracking-widest hover:scale-[1.02] transition-transform">Command the Light</button>
+                </div>
+            </div>
+
+            <div class="glass p-10 rounded-[2.5rem] border-white/5 order-3">
+                <h3 class="text-lg font-bold mb-1">Helios</h3>
+                <div class="text-3xl font-black mb-6">$999<span class="text-sm text-white/30">/mo</span></div>
+                <ul class="space-y-4 mb-8 text-sm text-white/50">
+                    <li>✓ Custom Oracle Logic</li>
+                    <li>✓ Infinite Retention</li>
+                    <li>✓ 24/7 Divine Support</li>
+                </ul>
+                <button onclick="addToCart('Helios Plan', 999)" class="w-full py-4 rounded-2xl border border-white/10 hover:bg-white/5 transition-colors font-bold text-xs uppercase tracking-widest">Select Plan</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <section class="py-24 px-6 bg-white/[0.02]">
+        <div class="max-w-7xl mx-auto text-center mb-16" data-aos="fade-up">
+            <h2 class="text-4xl font-extrabold tracking-tighter mb-4">Adaptive Dawn Workflows</h2>
+            <p class="text-white/40 uppercase text-[10px] tracking-[.3em] font-bold">The interface that follows the sun</p>
+        </div>
+        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-px bg-white/10 border border-white/10 rounded-3xl overflow-hidden shadow-2xl">
+            <div class="bg-[#050508] p-12 hover:bg-yellow-500/[0.02] transition-colors">
+                <h4 class="text-yellow-500 font-bold mb-4 uppercase text-xs tracking-widest">06:00 - Dawn Rise</h4>
+                <p class="text-white/60 text-sm">Hyperion activates low-light mode, prioritizing overnight anomaly reports and morning traffic preparation.</p>
+            </div>
+            <div class="bg-[#050508] p-12 hover:bg-yellow-500/[0.02] transition-colors">
+                <h4 class="text-orange-500 font-bold mb-4 uppercase text-xs tracking-widest">12:00 - Solar Peak</h4>
+                <p class="text-white/60 text-sm">High-intensity metrics monitoring. Chariot-class visualization expands to track maximum system load.</p>
+            </div>
+            <div class="bg-[#050508] p-12 hover:bg-yellow-500/[0.02] transition-colors">
+                <h4 class="text-purple-500 font-bold mb-4 uppercase text-xs tracking-widest">18:00 - Dusk Settling</h4>
+                <p class="text-white/60 text-sm">Predictive models shift to maintenance scheduling and automated back-up cycles for the night ahead.</p>
+            </div>
+            <div class="bg-[#050508] p-12 hover:bg-yellow-500/[0.02] transition-colors">
+                <h4 class="text-blue-500 font-bold mb-4 uppercase text-xs tracking-widest">00:00 - Stellar Midnight</h4>
+                <p class="text-white/60 text-sm">Silent observation. AI Oracles run deep-historical audits while the mortal world sleeps.</p>
+            </div>
+        </div>
+        
+    </section>
+
+   
+
+    <footer class="p-20 text-center border-t border-white/5">
+        <p class="text-[10px] font-bold text-white/20 uppercase tracking-[0.5em] mb-4">Hyperion Vision Systems // Celestial Data Agency</p>
+        <div class="flex justify-center gap-8 text-[9px] font-black text-white/40 uppercase tracking-widest">
+            <a href="#" class="hover:text-yellow-500">Twitter</a>
+            <a href="#" class="hover:text-yellow-500">Stellar Discord</a>
+            <a href="#" class="hover:text-yellow-500">Mortal Support</a>
+        </div>
+    </footer>
+
+    <script>
+        AOS.init({ duration: 1000, once: true });
+        const log = document.getElementById('terminal-log');
+    const input = document.getElementById('terminal-input');
+    const body = document.getElementById('terminal-body');
+
+    const bootSequence = [
+        "Connecting to Helios satellite uplink...",
+        "AUTHENTICATING: Titan_Class_Clearance_Active",
+        "DECRYPTING: [####################] 100%",
+        "Prophetic engine: ONLINE",
+        "Welcome, Oracle. Type 'help' to begin."
+    ];
+
+    let i = 0;
+    function printBoot() {
+        if (i < bootSequence.length) {
+            const div = document.createElement('div');
+            div.innerHTML = `<span class="text-white/20">></span> ${bootSequence[i]}`;
+            log.appendChild(div);
+            i++;
+            setTimeout(printBoot, 600);
+            body.scrollTop = body.scrollHeight;
+        }
+    }
+
+    const commands = {
+        "help": "Available: 'vision', 'status', 'clear', 'exit'",
+        "vision": "PREDICTION: Solar spike expected at 18:45 UTC. Probability: 0.92.",
+        "status": "SYSTEM: Operational | LOAD: 12% | HEAT: 310K",
+        "clear": "CLEAR"
+    };
+
+    input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            const cmd = input.value.toLowerCase().trim();
+            const responseDiv = document.createElement('div');
+            
+            responseDiv.innerHTML = `<span class="text-white/40">hyperion@oracle:~$</span> ${cmd}`;
+            log.appendChild(responseDiv);
+
+            if (commands[cmd]) {
+                if (commands[cmd] === "CLEAR") {
+                    log.innerHTML = "";
+                } else {
+                    const reply = document.createElement('div');
+                    reply.className = "text-white/60 mb-2";
+                    reply.innerHTML = `<span class="text-yellow-500/40">↳</span> ${commands[cmd]}`;
+                    log.appendChild(reply);
+                }
+            } else if (cmd !== "") {
+                const error = document.createElement('div');
+                error.className = "text-red-500/60 mb-2";
+                error.innerHTML = `Unknown command: ${cmd}`;
+                log.appendChild(error);
+            }
+
+            input.value = "";
+            body.scrollTop = body.scrollHeight;
+        }
+    });
+
+    window.onload = printBoot;
+
+    // 1. Handle clicks on the same page
+    document.querySelectorAll('a[href^="index.html#"], a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            
+            // Only intercept if we are already on index.html or if it's a pure hash link
+            if (window.location.pathname.includes('index.html') || window.location.pathname === '/' || href.startsWith('#')) {
+                const targetId = href.includes('#') ? href.split('#')[1] : null;
+                const targetElement = document.getElementById(targetId);
+
+                if (targetElement) {
+                    e.preventDefault();
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80, // Offset for sticky navbar
+                        behavior: 'smooth'
+                    });
+                    // Update URL without jump
+                    history.pushState(null, null, `#${targetId}`);
+                }
+            }
+        });
+    });
+
+    // 2. Handle incoming links from other pages (e.g., demo.html -> index.html#features)
+    window.addEventListener('load', () => {
+        if (window.location.hash) {
+            const target = document.querySelector(window.location.hash);
+            if (target) {
+                // Brief timeout to let the browser settle
+                setTimeout(() => {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }, 100);
+            }
+        }
+    });
+
+function addToCart(name, price) {
+        // Save plan data to browser storage
+        const selection = {
+            planName: name,
+            planPrice: price
+        };
+        localStorage.setItem('hyperion_selection', JSON.stringify(selection));
+        
+        // Redirect to cart
+        window.location.href = 'cart.html';
+    }
+    </script>
+</body>
+</html>
